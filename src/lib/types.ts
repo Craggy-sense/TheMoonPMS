@@ -1,6 +1,16 @@
 export type BookingSource = 'airbnb' | 'booking.com' | 'direct' | 'manual';
 export type BookingStatus = 'confirmed' | 'checked_in' | 'checked_out' | 'cancelled';
 export type UnitStatus = 'clean' | 'dirty' | 'in_progress' | 'maintenance';
+export type StaffRole = 'admin' | 'reception' | 'housekeeping';
+
+export interface StaffUser {
+  id: string;
+  name: string;
+  email: string;
+  role: StaffRole;
+  pin?: string;
+  created_at?: string;
+}
 
 export interface Unit {
   id: string;
