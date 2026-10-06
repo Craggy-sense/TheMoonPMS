@@ -2,19 +2,34 @@ import Database from 'better-sqlite3';
 import path from 'path';
 import fs from 'fs';
 
-const DB_DIR = path.join(process.cwd(), 'data');
+const isVercel = process.env.VERCEL === '1' || Boolean(process.env.AWS_LAMBDA_FUNCTION_NAME);
+const DB_DIR = isVercel ? '/tmp' : path.join(process.cwd(), 'data');
 if (!fs.existsSync(DB_DIR)) {
   fs.mkdirSync(DB_DIR, { recursive: true });
 }
 
 const DB_PATH = path.join(DB_DIR, 'moon_apartments.db');
 
+// If running on Vercel serverless, copy local database snapshot to writable /tmp on cold start
+if (isVercel) {
+  try {
+    const localDbPath = path.join(process.cwd(), 'data', 'moon_apartments.db');
+    if (fs.existsSync(localDbPath) && !fs.existsSync(DB_PATH)) {
+      fs.copyFileSync(localDbPath, DB_PATH);
+    }
+  } catch (err) {
+    console.warn('Vercel DB bootstrap notice:', err);
+  }
+}
+
 let _db: Database.Database | null = null;
 
 export function getDb(): Database.Database {
   if (!_db) {
     _db = new Database(DB_PATH);
-    _db.pragma('journal_mode = WAL');
+    if (!isVercel) {
+      _db.pragma('journal_mode = WAL');
+    }
     initTables(_db);
   }
   return _db;
