@@ -140,10 +140,10 @@ export function ReservationsList({
 
                     <td>
                       <div style={{ fontWeight: 700, color: 'var(--moon-gold)' }}>
-                        KES {b.total_price.toLocaleString()}
+                        KSH {b.total_price.toLocaleString()}
                       </div>
                       <div style={{ fontSize: '11px', color: b.paid_amount >= b.total_price ? '#10B981' : '#F59E0B' }}>
-                        {b.paid_amount >= b.total_price ? 'Paid' : `KES ${b.paid_amount.toLocaleString()} paid`}
+                        {b.paid_amount >= b.total_price ? 'Paid' : `KSH ${b.paid_amount.toLocaleString()} paid`}
                       </div>
                     </td>
 

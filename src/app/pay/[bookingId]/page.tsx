@@ -131,7 +131,7 @@ export default function GuestPayPage({ params }: PageProps) {
 
   if (loading) {
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#080C15', color: '#FFF' }}>
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', color: '#0F172A' }}>
         <RefreshCw size={24} className="animate-spin" style={{ color: 'var(--moon-gold)' }} />
       </div>
     );
@@ -139,7 +139,7 @@ export default function GuestPayPage({ params }: PageProps) {
 
   if (!booking) {
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#080C15', color: '#FFF' }}>
+      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', color: '#0F172A' }}>
         <h2>Reservation Not Found</h2>
         <p style={{ color: 'var(--text-muted)', marginTop: '8px' }}>Please verify your reservation link #{bookingId}</p>
       </div>
@@ -151,21 +151,23 @@ export default function GuestPayPage({ params }: PageProps) {
   const isPaid = paymentSuccess || booking.paid_amount >= booking.total_price;
 
   return (
-    <div style={{ minHeight: '100vh', background: '#080C15', padding: '30px 20px', display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
+    <div style={{ minHeight: '100vh', background: '#FAFAFA', padding: '30px 20px', display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
       <div style={{ width: '100%', maxWidth: '580px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
         
         {/* Brand Banner */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 20px', background: 'rgba(14, 21, 38, 0.8)', borderRadius: '16px', border: '1px solid var(--border-subtle)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 20px', background: '#FFFFFF', borderRadius: '16px', border: '1px solid var(--border-subtle)', boxShadow: '0 2px 10px rgba(0,0,0,0.04)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Moon size={22} fill="#080C15" color="#080C15" />
-            </div>
+            <img
+              src="/themoon-icon.webp"
+              alt="The Moon"
+              style={{ width: '38px', height: '38px', borderRadius: '50%', boxShadow: '0 2px 8px rgba(217, 119, 6, 0.2)' }}
+            />
             <div>
-              <div style={{ fontWeight: 700, fontSize: '16px', color: '#FFF' }}>THE MOON APARTMENTS</div>
-              <div style={{ fontSize: '11px', color: 'var(--moon-gold)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Guest Payment Portal</div>
+              <div style={{ fontWeight: 700, fontSize: '16px', color: '#0F172A' }}>THE MOON APARTMENTS</div>
+              <div style={{ fontSize: '11px', color: 'var(--moon-gold)', letterSpacing: '0.08em', textTransform: 'uppercase', fontWeight: 600 }}>Guest Payment Portal</div>
             </div>
           </div>
-          <span style={{ fontSize: '12px', background: 'rgba(255,255,255,0.06)', padding: '4px 10px', borderRadius: '20px', color: 'var(--text-secondary)' }}>
+          <span style={{ fontSize: '12px', background: '#F1F5F9', border: '1px solid #E2E8F0', padding: '4px 10px', borderRadius: '20px', color: 'var(--text-secondary)' }}>
             #{booking.id}
           </span>
         </div>
@@ -240,19 +242,19 @@ export default function GuestPayPage({ params }: PageProps) {
             </div>
 
             {/* Price display & Currency toggle */}
-            <div style={{ background: 'rgba(255, 255, 255, 0.02)', padding: '16px', borderRadius: '12px', border: '1px solid var(--border-subtle)', marginBottom: '20px' }}>
+            <div style={{ background: '#F8FAFC', padding: '16px', borderRadius: '12px', border: '1px solid var(--border-subtle)', marginBottom: '20px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                   <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Total Amount Outstanding</div>
                   <div style={{ fontSize: '26px', fontWeight: 800, color: 'var(--moon-gold)', fontFamily: 'var(--font-heading)', marginTop: '2px' }}>
                     {currency === 'KES'
-                      ? `KES ${balanceKes.toLocaleString()}`
+                      ? `KSH ${balanceKes.toLocaleString()}`
                       : `$${balanceUsd.toLocaleString()}`}
                   </div>
                 </div>
 
                 {/* Currency selector */}
-                <div style={{ display: 'flex', background: 'rgba(0,0,0,0.3)', padding: '3px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ display: 'flex', background: '#FFFFFF', padding: '3px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
                   <button
                     type="button"
                     onClick={() => setCurrency('KES')}
@@ -261,11 +263,11 @@ export default function GuestPayPage({ params }: PageProps) {
                       fontSize: '12px',
                       borderRadius: '6px',
                       background: currency === 'KES' ? 'var(--moon-gold)' : 'transparent',
-                      color: currency === 'KES' ? '#080C15' : 'var(--text-secondary)',
+                      color: currency === 'KES' ? '#FFFFFF' : 'var(--text-secondary)',
                       fontWeight: 600
                     }}
                   >
-                    KES (M-Pesa)
+                    KSH (M-Pesa)
                   </button>
                   <button
                     type="button"
@@ -275,7 +277,7 @@ export default function GuestPayPage({ params }: PageProps) {
                       fontSize: '12px',
                       borderRadius: '6px',
                       background: currency === 'USD' ? 'var(--moon-gold)' : 'transparent',
-                      color: currency === 'USD' ? '#080C15' : 'var(--text-secondary)',
+                      color: currency === 'USD' ? '#FFFFFF' : 'var(--text-secondary)',
                       fontWeight: 600
                     }}
                   >
@@ -289,7 +291,7 @@ export default function GuestPayPage({ params }: PageProps) {
             {currency === 'KES' && (
               <div className="form-group" style={{ marginBottom: '18px' }}>
                 <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <Smartphone size={15} style={{ color: '#10B981' }} /> Safaricom M-Pesa Phone Number
+                  <Smartphone size={15} style={{ color: '#059669' }} /> Safaricom M-Pesa Phone Number
                 </label>
                 <input
                   type="tel"
@@ -305,10 +307,10 @@ export default function GuestPayPage({ params }: PageProps) {
 
             {/* Payment Method Badges */}
             <div style={{ display: 'flex', gap: '10px', marginBottom: '22px' }}>
-              <div style={{ flex: 1, padding: '10px', background: 'rgba(16, 185, 129, 0.08)', border: '1px solid rgba(16, 185, 129, 0.25)', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#34D399' }}>
+              <div style={{ flex: 1, padding: '10px', background: '#ECFDF5', border: '1px solid #A7F3D0', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#065F46', fontWeight: 600 }}>
                 <Smartphone size={16} /> M-Pesa Express
               </div>
-              <div style={{ flex: 1, padding: '10px', background: 'rgba(99, 102, 241, 0.08)', border: '1px solid rgba(99, 102, 241, 0.25)', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#818CF8' }}>
+              <div style={{ flex: 1, padding: '10px', background: '#EEF2FF', border: '1px solid #C7D2FE', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#3730A3', fontWeight: 600 }}>
                 <CreditCard size={16} /> Visa & Mastercard
               </div>
             </div>
@@ -323,9 +325,9 @@ export default function GuestPayPage({ params }: PageProps) {
                 padding: '14px',
                 fontSize: '15px',
                 justifyContent: 'center',
-                background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
                 color: '#FFF',
-                boxShadow: '0 4px 20px rgba(16, 185, 129, 0.3)'
+                boxShadow: '0 4px 14px rgba(5, 150, 105, 0.25)'
               }}
             >
               {processing ? (
@@ -334,7 +336,7 @@ export default function GuestPayPage({ params }: PageProps) {
                 </>
               ) : (
                 <>
-                  Pay {currency === 'KES' ? `KES ${balanceKes.toLocaleString()}` : `$${balanceUsd}`} with Paystack <ArrowRight size={18} />
+                  Pay {currency === 'KES' ? `KSH ${balanceKes.toLocaleString()}` : `$${balanceUsd}`} with Paystack <ArrowRight size={18} />
                 </>
               )}
             </button>

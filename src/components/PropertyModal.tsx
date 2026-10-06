@@ -212,7 +212,7 @@ export function PropertyModal({ unit, onClose, onSaved }: PropertyModalProps) {
                   />
                 </div>
                 <div className="form-group">
-                  <label className="form-label">Nightly Rate (KES)</label>
+                  <label className="form-label">Nightly Rate (KSH)</label>
                   <input
                     type="number"
                     value={basePrice}
@@ -221,7 +221,7 @@ export function PropertyModal({ unit, onClose, onSaved }: PropertyModalProps) {
                   />
                 </div>
                 <div className="form-group">
-                  <label className="form-label">Cleaning Fee (KES)</label>
+                  <label className="form-label">Cleaning Fee (KSH)</label>
                   <input
                     type="number"
                     value={cleaningFee}

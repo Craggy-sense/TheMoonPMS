@@ -117,7 +117,7 @@ export function BookingDetailsModal({
               </div>
             </div>
 
-            <div style={{ padding: '14px', background: 'rgba(0,0,0,0.2)', borderRadius: 'var(--radius-sm)' }}>
+            <div style={{ padding: '14px', background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: 'var(--radius-sm)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--text-muted)', fontSize: '12px' }}>
                 <Calendar size={14} /> Stay Duration ({nights} {nights === 1 ? 'Night' : 'Nights'})
               </div>
@@ -131,18 +131,18 @@ export function BookingDetailsModal({
           </div>
 
           {/* Financial summary */}
-          <div style={{ padding: '16px', background: 'rgba(245, 158, 11, 0.05)', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(245, 158, 11, 0.15)' }}>
+          <div style={{ padding: '16px', background: '#FFFBEB', borderRadius: 'var(--radius-sm)', border: '1px solid #FDE68A' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
-                <span style={{ fontSize: '12px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Total Amount</span>
-                <div style={{ fontSize: '22px', fontWeight: 700, color: 'var(--moon-gold)' }}>
-                  KES {booking.total_price.toLocaleString()}
+                <span style={{ fontSize: '12px', color: '#92400E', textTransform: 'uppercase', fontWeight: 700 }}>Total Amount</span>
+                <div style={{ fontSize: '22px', fontWeight: 800, color: 'var(--moon-gold)' }}>
+                  KSH {booking.total_price.toLocaleString()}
                 </div>
               </div>
               <div style={{ textAlign: 'right' }}>
-                <span style={{ fontSize: '12px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Payment Status</span>
-                <div style={{ fontSize: '14px', fontWeight: 600, color: booking.paid_amount >= booking.total_price ? '#10B981' : '#F59E0B' }}>
-                  {booking.paid_amount >= booking.total_price ? 'Fully Paid' : `KES ${booking.paid_amount.toLocaleString()} Paid (Due: KES ${(booking.total_price - booking.paid_amount).toLocaleString()})`}
+                <span style={{ fontSize: '12px', color: '#92400E', textTransform: 'uppercase', fontWeight: 700 }}>Payment Status</span>
+                <div style={{ fontSize: '14px', fontWeight: 600, color: booking.paid_amount >= booking.total_price ? '#059669' : '#D97706' }}>
+                  {booking.paid_amount >= booking.total_price ? 'Fully Paid' : `KSH ${booking.paid_amount.toLocaleString()} Paid (Due: KSH ${(booking.total_price - booking.paid_amount).toLocaleString()})`}
                 </div>
               </div>
             </div>

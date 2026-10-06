@@ -183,7 +183,7 @@ export function StaffManagementModal({ onClose }: StaffManagementModalProps) {
                 <div
                   key={s.id}
                   style={{
-                    background: 'rgba(0,0,0,0.3)',
+                    background: '#F8FAFC',
                     border: '1px solid var(--border-subtle)',
                     padding: '12px 14px',
                     borderRadius: '8px',

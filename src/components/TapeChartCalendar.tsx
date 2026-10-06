@@ -180,7 +180,7 @@ export function TapeChartCalendar({
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px' }}>
                       <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
-                        Fl {unit.floor} • KES {unit.base_price.toLocaleString()}/nt
+                        Fl {unit.floor} • KSH {unit.base_price.toLocaleString()}/nt
                       </span>
                       <span className={`badge badge-${unit.status}`}>
                         {unit.status.replace('_', ' ')}

@@ -136,11 +136,11 @@ export function UnitsCatalog({ units, onRefreshData }: UnitsCatalogProps) {
                 <div style={{ display: 'flex', gap: '18px', marginTop: '14px', padding: '12px 0', borderTop: '1px solid var(--border-subtle)', borderBottom: '1px solid var(--border-subtle)' }}>
                   <div>
                     <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Nightly Base</div>
-                    <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--moon-gold)' }}>KES {u.base_price.toLocaleString()}/nt</div>
+                    <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--moon-gold)' }}>KSH {u.base_price.toLocaleString()}/nt</div>
                   </div>
                   <div>
                     <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Cleaning Fee</div>
-                    <div style={{ fontSize: '15px', fontWeight: 600 }}>KES {u.cleaning_fee.toLocaleString()}</div>
+                    <div style={{ fontSize: '15px', fontWeight: 600 }}>KSH {u.cleaning_fee.toLocaleString()}</div>
                   </div>
                   <div>
                     <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Guest Limit</div>
@@ -150,7 +150,7 @@ export function UnitsCatalog({ units, onRefreshData }: UnitsCatalogProps) {
 
                 {/* Custom Access details (Door Code & Wi-Fi) */}
                 {(u.door_code || u.wifi_name) && (
-                  <div style={{ marginTop: '12px', padding: '10px 12px', background: 'rgba(0,0,0,0.25)', borderRadius: 'var(--radius-sm)', display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
+                  <div style={{ marginTop: '12px', padding: '10px 12px', background: '#F8FAFC', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-sm)', display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
                     {u.door_code && (
                       <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#10B981' }}>
                         <Key size={13} /> Keycode: <strong style={{ color: 'var(--text-main)' }}>{u.door_code}</strong>

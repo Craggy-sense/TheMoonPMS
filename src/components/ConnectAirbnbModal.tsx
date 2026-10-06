@@ -127,7 +127,7 @@ export function ConnectAirbnbModal({ unit, onClose, onConnected }: ConnectAirbnb
             )}
 
             {/* STEP 1: IMPORT FROM AIRBNB */}
-            <div style={{ background: 'rgba(255, 255, 255, 0.02)', padding: '16px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-subtle)' }}>
+            <div style={{ background: '#F8FAFC', padding: '16px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-subtle)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
                 <span style={{
                   background: 'var(--airbnb-color)',
@@ -162,11 +162,11 @@ export function ConnectAirbnbModal({ unit, onClose, onConnected }: ConnectAirbnb
             </div>
 
             {/* STEP 2: EXPORT TO AIRBNB */}
-            <div style={{ background: 'rgba(255, 255, 255, 0.02)', padding: '16px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-subtle)' }}>
+            <div style={{ background: '#F8FAFC', padding: '16px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-subtle)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
                 <span style={{
                   background: 'var(--moon-gold)',
-                  color: '#080C15',
+                  color: '#FFF',
                   width: '20px',
                   height: '20px',
                   borderRadius: '50%',

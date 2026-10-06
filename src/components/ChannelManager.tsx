@@ -224,7 +224,7 @@ export function ChannelManager({ units, onRefreshData }: ChannelManagerProps) {
                 <div
                   key={u.id}
                   style={{
-                    background: 'rgba(255, 255, 255, 0.02)',
+                    background: '#F8FAFC',
                     border: '1px solid var(--border-subtle)',
                     borderRadius: 'var(--radius-sm)',
                     padding: '12px 16px',
@@ -335,7 +335,7 @@ export function ChannelManager({ units, onRefreshData }: ChannelManagerProps) {
                 <div
                   key={f.id}
                   style={{
-                    background: 'rgba(0, 0, 0, 0.25)',
+                    background: '#F8FAFC',
                     border: '1px solid var(--border-subtle)',
                     borderRadius: 'var(--radius-sm)',
                     padding: '12px 14px',

@@ -76,7 +76,7 @@ export function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
       alignItems: 'center',
       justifyContent: 'center',
       padding: '24px',
-      background: 'radial-gradient(circle at 50% 20%, rgba(99, 102, 241, 0.12) 0%, #080C15 60%)'
+      background: 'radial-gradient(circle at 50% 15%, #F1F5F9 0%, #FFFFFF 65%)'
     }}>
       <div style={{ width: '100%', maxWidth: '440px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
         
@@ -86,7 +86,7 @@ export function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
             <img
               src="/themoon-icon.webp"
               alt="The Moon Icon"
-              style={{ width: '48px', height: '48px', borderRadius: '50%', boxShadow: '0 0 25px rgba(56, 189, 248, 0.5)' }}
+              style={{ width: '48px', height: '48px', borderRadius: '50%', boxShadow: '0 4px 15px rgba(217, 119, 6, 0.25)' }}
             />
             <img
               src="/themoon-serenity-logo.webp"
@@ -94,15 +94,15 @@ export function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
               style={{ maxHeight: '42px', maxWidth: '240px', objectFit: 'contain' }}
             />
           </div>
-          <p style={{ fontSize: '12px', color: 'var(--moon-gold)', letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 600 }}>
+          <p style={{ fontSize: '12px', color: 'var(--moon-gold)', letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 700 }}>
             Ruaka • Thindigua • Fourways Junction
           </p>
         </div>
 
         {/* Login Card */}
-        <div className="glass-panel" style={{ padding: '28px' }}>
+        <div className="glass-panel" style={{ padding: '28px', background: '#FFFFFF', boxShadow: '0 10px 30px rgba(15, 23, 42, 0.08)' }}>
           {/* Tabs */}
-          <div style={{ display: 'flex', background: 'rgba(0,0,0,0.3)', padding: '4px', borderRadius: '10px', marginBottom: '22px', border: '1px solid var(--border-subtle)' }}>
+          <div style={{ display: 'flex', background: '#F1F5F9', padding: '4px', borderRadius: '10px', marginBottom: '22px', border: '1px solid var(--border-subtle)' }}>
             <button
               type="button"
               onClick={() => { setTab('pin'); setErrorMsg(''); }}
@@ -116,8 +116,9 @@ export function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '6px',
-                background: tab === 'pin' ? 'rgba(255, 255, 255, 0.12)' : 'transparent',
-                color: tab === 'pin' ? '#FFF' : 'var(--text-secondary)'
+                background: tab === 'pin' ? '#FFFFFF' : 'transparent',
+                color: tab === 'pin' ? '#0F172A' : '#64748B',
+                boxShadow: tab === 'pin' ? '0 1px 3px rgba(0,0,0,0.08)' : 'none'
               }}
             >
               <KeyRound size={15} /> Quick Staff PIN
@@ -135,8 +136,9 @@ export function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '6px',
-                background: tab === 'password' ? 'rgba(255, 255, 255, 0.12)' : 'transparent',
-                color: tab === 'password' ? '#FFF' : 'var(--text-secondary)'
+                background: tab === 'password' ? '#FFFFFF' : 'transparent',
+                color: tab === 'password' ? '#0F172A' : '#64748B',
+                boxShadow: tab === 'password' ? '0 1px 3px rgba(0,0,0,0.08)' : 'none'
               }}
             >
               <Mail size={15} /> Email Login
@@ -244,7 +246,7 @@ export function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
                   <ShieldCheck size={14} style={{ color: 'var(--moon-gold)' }} />
                   <strong>Manager (Admin)</strong> — Full Access
                 </span>
-                <code style={{ color: '#38BDF8' }}>PIN: 8899</code>
+                <code style={{ color: '#0369A1', background: '#F0F9FF', border: '1px solid #BAE6FD', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>PIN: 8899</code>
               </button>
 
               <button
@@ -254,10 +256,10 @@ export function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
                 style={{ justifyContent: 'space-between', padding: '8px 12px', fontSize: '12.5px' }}
               >
                 <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <UserCheck size={14} style={{ color: '#818CF8' }} />
+                  <UserCheck size={14} style={{ color: '#4F46E5' }} />
                   <strong>Front Desk (Host)</strong> — Bookings & Guests
                 </span>
-                <code style={{ color: '#38BDF8' }}>PIN: 4455</code>
+                <code style={{ color: '#0369A1', background: '#F0F9FF', border: '1px solid #BAE6FD', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>PIN: 4455</code>
               </button>
 
               <button
@@ -267,10 +269,10 @@ export function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
                 style={{ justifyContent: 'space-between', padding: '8px 12px', fontSize: '12.5px' }}
               >
                 <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <Sparkles size={14} style={{ color: '#10B981' }} />
+                  <Sparkles size={14} style={{ color: '#059669' }} />
                   <strong>Housekeeping</strong> — Room Turnovers Only
                 </span>
-                <code style={{ color: '#38BDF8' }}>PIN: 1122</code>
+                <code style={{ color: '#0369A1', background: '#F0F9FF', border: '1px solid #BAE6FD', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>PIN: 1122</code>
               </button>
             </div>
           </div>

@@ -224,8 +224,8 @@ export function NewBookingModal({
 
             {/* Price Preview Card */}
             <div style={{
-              background: 'rgba(255, 255, 255, 0.03)',
-              border: '1px solid var(--border-subtle)',
+              background: '#F8FAFC',
+              border: '1px solid #CBD5E1',
               borderRadius: 'var(--radius-sm)',
               padding: '14px 16px',
               display: 'flex',
@@ -234,10 +234,10 @@ export function NewBookingModal({
             }}>
               <div>
                 <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-                  {nights} Nights (KES {selectedUnit?.base_price?.toLocaleString() || 0}/nt) + Cleaning Fee (KES {selectedUnit?.cleaning_fee?.toLocaleString() || 0})
+                  {nights} Nights (KSH {selectedUnit?.base_price?.toLocaleString() || 0}/nt) + Cleaning Fee (KSH {selectedUnit?.cleaning_fee?.toLocaleString() || 0})
                 </div>
-                <div style={{ fontSize: '20px', fontWeight: 700, color: 'var(--moon-gold)' }}>
-                  Total: KES {totalPrice.toLocaleString()}
+                <div style={{ fontSize: '20px', fontWeight: 800, color: 'var(--moon-gold)' }}>
+                  Total: KSH {totalPrice.toLocaleString()}
                 </div>
               </div>
 

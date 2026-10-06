@@ -88,7 +88,7 @@ export function HousekeepingTracker({ units, onRefreshData }: HousekeepingTracke
             <div
               key={u.id}
               style={{
-                background: 'rgba(255, 255, 255, 0.02)',
+                background: '#F8FAFC',
                 border: '1px solid var(--border-subtle)',
                 borderRadius: 'var(--radius-sm)',
                 padding: '16px',

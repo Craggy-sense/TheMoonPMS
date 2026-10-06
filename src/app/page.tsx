@@ -175,7 +175,7 @@ export default function MoonApartmentsDashboard() {
   // If loading session
   if (authChecking) {
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#080C15', color: '#FFF' }}>
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAFAFA', color: '#0F172A' }}>
         <RefreshCw size={26} className="animate-spin" style={{ color: 'var(--moon-gold)' }} />
       </div>
     );
@@ -211,10 +211,10 @@ export default function MoonApartmentsDashboard() {
           top: '80px',
           right: '28px',
           zIndex: 1000,
-          background: '#0F172A',
-          border: '1px solid var(--border-active)',
+          background: '#FFFFFF',
+          border: '1px solid #CBD5E1',
           borderRadius: 'var(--radius-sm)',
-          boxShadow: '0 10px 25px rgba(0,0,0,0.5)',
+          boxShadow: '0 10px 25px rgba(15, 23, 42, 0.12)',
           padding: '12px 18px',
           display: 'flex',
           alignItems: 'center',
@@ -402,8 +402,8 @@ export default function MoonApartmentsDashboard() {
                   <span>Monthly Revenue</span>
                   <Home size={14} style={{ color: '#10B981' }} />
                 </div>
-                <div className="kpi-value">KES {stats.totalRevenue.toLocaleString()}</div>
-                <div className="kpi-desc">ADR: KES {stats.adr.toLocaleString()}/night</div>
+                <div className="kpi-value">KSH {stats.totalRevenue.toLocaleString()}</div>
+                <div className="kpi-desc">ADR: KSH {stats.adr.toLocaleString()}/night</div>
               </div>
             )}
 
