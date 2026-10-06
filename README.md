@@ -1,42 +1,45 @@
-# The Moon Apartments PMS 🌙
-
-A modern, high-performance Property Management System (PMS) tailored for boutique serviced apartments and short-term rentals (STR). Built with Next.js 16, React 19, SQLite, and bespoke midnight luxury styling.
+<div align="center">
+  <img src="public/themoon-icon.webp" width="70" height="70" alt="The Moon Icon" style="border-radius: 50%;" />
+  <br />
+  <img src="public/themoon-serenity-logo.webp" width="340" alt="The Moon Serenity Furnished Apartments" />
+  <p><strong>Ruaka • Thindigua • Fourways Junction (Nairobi, Kenya)</strong></p>
+  <p><em>Modern Property Management System (PMS) for serviced apartments & Airbnb with Paystack M-Pesa & 2-Way iCal synchronization.</em></p>
+</div>
 
 ---
 
-## 🌟 Core Features
+## 🌟 Overview & Key Capabilities
+
+**The Moon PMS** is a high-performance Property Management System specifically built for **The Moon Serenity Furnished Apartments** across Nairobi.
 
 - **📅 Interactive Multi-Unit Tape Chart**:
-  - Live availability calendar across all apartment units.
-  - Color-coded channel badges (Airbnb Rose, Booking.com Blue, Direct Emerald, Manual Purple).
-  - Click-to-book directly from any empty calendar date cell.
-  - Interactive reservation drawer with guest details and lifecycle management (Confirmed, Checked In, Checked Out, Cancelled).
+  - Live availability grid for all units in Ruaka, Thindigua, and Fourways Junction.
+  - Color-coded channel tags (Airbnb Rose, Booking.com Blue, Direct Emerald, Manual Purple).
+  - Click any vacant cell on the calendar to open instant reservation creation.
+  - Interactive reservation drawer with guest notes and status lifecycle.
 
 - **🔄 Two-Way iCal Channel Synchronization (Airbnb & Booking.com)**:
-  - **Export Feed**: Compliant RFC 5545 iCalendar endpoint (`/api/ical/export?unitId=...`) for every apartment to block booked dates on Airbnb and Booking.com.
-  - **Import Feed**: Subscribes to external OTA calendar feeds with automatic UID deduplication.
-  - **Background Auto-Sync**: Automatically synchronizes all feeds every 5 minutes.
-  - **Built-in iCal Sandbox**: Test and paste raw `.ics` calendar files directly to preview imported reservations.
+  - **Live Export**: Compliant RFC 5545 iCalendar endpoint (`/api/ical/export?unitId=...`) per unit to block dates on external channels.
+  - **Smart Import**: Subscribes to Airbnb & Booking.com export feeds with UID deduplication and double-booking collision defense.
+  - **Background Auto-Sync**: Background timer automatically updates channel feeds.
 
-- **🛡️ Double-Booking Prevention**:
-  - Strict date boundary collision checks in SQLite (`check_in < existing_check_out AND check_out > existing_check_in`) to prevent conflicting reservations.
+- **📱 Paystack Kenyan Payments (M-Pesa & Cards in KSH)**:
+  - **Guest Payment Portal** (`/pay/[bookingId]`): Shareable guest link with STK push.
+  - **Safaricom M-Pesa Express**: Prompts guest phone for instant PIN authorization.
+  - **Visa / Mastercard / Amex**: International card processing for incoming tourists and diplomats.
+  - **Currencies**: Native support for Kenyan Shillings (`KSH`) and US Dollars (`USD`).
 
-- **📱 Paystack Kenyan Payments (M-Pesa & International Cards)**:
-  - **Guest Payment Portal** (`/pay/[bookingId]`): Shareable payment link for guests.
-  - **M-Pesa Express (Kenya)**: Instant STK push prompt on Safaricom mobile numbers.
-  - **Visa / Mastercard / Amex**: Credit/debit card support for international travelers and tourists.
-  - **Dual Currency**: Native support for Kenyan Shillings (`KES`) and US Dollars (`USD`).
-  - **Automated Webhooks**: HMAC SHA-512 verified listener automatically marks reservations as **Fully Paid**.
-
-- **🔑 Smart Keyless Check-in & Wi-Fi Dispatch**:
-  - Automatically delivers apartment door keycodes (e.g. `*5501#`) and Wi-Fi credentials upon confirmed payment.
+- **🔑 Smart Door Keycodes & Wi-Fi Automation**:
+  - Automatically releases door lock keycodes (e.g. `*1012#`) and Wi-Fi credentials upon confirmed payment.
 
 - **🧹 Housekeeping & Turnover Roster**:
-  - Automated transition to `dirty` upon guest checkout.
-  - Departure turnover scheduling and single-click `clean & ready` sign-off.
+  - Automatically flags units as `dirty` upon checkout.
+  - Real-time cleaning dispatch and one-click turnover sign-off.
 
-- **📊 Revenue Analytics & KPIs**:
-  - Real-time tracking of **Occupancy Rate %**, **Monthly Gross Revenue**, **ADR (Average Daily Rate)**, and channel distribution.
+- **🔐 Role-Based Access Control (RBAC) with Quick PINs**:
+  - **General Manager (Admin)** — PIN `8899` (Full access to Tape Chart, Financials, Channels, Rates)
+  - **Front Desk (Reception)** — PIN `4455` (Tape Chart & Guest Bookings; financials hidden)
+  - **Housekeeping** — PIN `1122` (Dedicated turnover dispatch portal only)
 
 ---
 
