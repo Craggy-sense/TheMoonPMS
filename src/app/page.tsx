@@ -230,14 +230,20 @@ export default function MoonApartmentsDashboard() {
 
       {/* Luxury Navigation Header */}
       <header className="pms-header">
-        <div className="brand-container">
-          <div className="brand-moon-icon">
-            <Moon size={22} fill="#080C15" />
-          </div>
+        <div className="brand-container" style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+          <img
+            src="/themoon-icon.webp"
+            alt="The Moon"
+            style={{ width: '42px', height: '42px', borderRadius: '50%', boxShadow: '0 0 18px rgba(56, 189, 248, 0.45)', objectFit: 'contain' }}
+          />
           <div>
-            <div className="brand-title">THE MOON APARTMENTS</div>
-            <div className="brand-subtitle">
-              {isAdmin ? 'Management Console' : isReception ? 'Front Desk Hub' : 'Housekeeping Portal'}
+            <img
+              src="/themoon-serenity-logo.webp"
+              alt="The Moon Serenity Furnished Apartments"
+              style={{ height: '30px', maxWidth: '200px', objectFit: 'contain', display: 'block' }}
+            />
+            <div className="brand-subtitle" style={{ marginTop: '2px', fontSize: '11px', color: 'var(--text-muted)' }}>
+              {isAdmin ? 'Ruaka • Thindigua • Fourways Junction | Management' : isReception ? 'Front Desk Hub' : 'Housekeeping Portal'}
             </div>
           </div>
         </div>
@@ -396,8 +402,8 @@ export default function MoonApartmentsDashboard() {
                   <span>Monthly Revenue</span>
                   <Home size={14} style={{ color: '#10B981' }} />
                 </div>
-                <div className="kpi-value">${stats.totalRevenue.toLocaleString()}</div>
-                <div className="kpi-desc">ADR: ${stats.adr}/night</div>
+                <div className="kpi-value">KES {stats.totalRevenue.toLocaleString()}</div>
+                <div className="kpi-desc">ADR: KES {stats.adr.toLocaleString()}/night</div>
               </div>
             )}
 

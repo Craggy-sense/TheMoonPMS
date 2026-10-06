@@ -136,13 +136,13 @@ export function BookingDetailsModal({
               <div>
                 <span style={{ fontSize: '12px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Total Amount</span>
                 <div style={{ fontSize: '22px', fontWeight: 700, color: 'var(--moon-gold)' }}>
-                  ${booking.total_price.toLocaleString()}
+                  KES {booking.total_price.toLocaleString()}
                 </div>
               </div>
               <div style={{ textAlign: 'right' }}>
                 <span style={{ fontSize: '12px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Payment Status</span>
                 <div style={{ fontSize: '14px', fontWeight: 600, color: booking.paid_amount >= booking.total_price ? '#10B981' : '#F59E0B' }}>
-                  {booking.paid_amount >= booking.total_price ? 'Fully Paid' : `$${booking.paid_amount} Paid (Due: $${booking.total_price - booking.paid_amount})`}
+                  {booking.paid_amount >= booking.total_price ? 'Fully Paid' : `KES ${booking.paid_amount.toLocaleString()} Paid (Due: KES ${(booking.total_price - booking.paid_amount).toLocaleString()})`}
                 </div>
               </div>
             </div>

@@ -136,11 +136,11 @@ export function UnitsCatalog({ units, onRefreshData }: UnitsCatalogProps) {
                 <div style={{ display: 'flex', gap: '18px', marginTop: '14px', padding: '12px 0', borderTop: '1px solid var(--border-subtle)', borderBottom: '1px solid var(--border-subtle)' }}>
                   <div>
                     <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Nightly Base</div>
-                    <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--moon-gold)' }}>${u.base_price}/nt</div>
+                    <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--moon-gold)' }}>KES {u.base_price.toLocaleString()}/nt</div>
                   </div>
                   <div>
                     <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Cleaning Fee</div>
-                    <div style={{ fontSize: '15px', fontWeight: 600 }}>${u.cleaning_fee}</div>
+                    <div style={{ fontSize: '15px', fontWeight: 600 }}>KES {u.cleaning_fee.toLocaleString()}</div>
                   </div>
                   <div>
                     <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Guest Limit</div>

@@ -92,96 +92,139 @@ function initTables(db: Database.Database) {
   if (!cols.includes('airbnb_listing_url')) db.exec('ALTER TABLE units ADD COLUMN airbnb_listing_url TEXT');
   if (!cols.includes('address')) db.exec('ALTER TABLE units ADD COLUMN address TEXT');
 
-  // Check if we need seed data
+  // Check if we need seed data or upgrade from old placeholders
   const unitCount = db.prepare('SELECT COUNT(*) as count FROM units').get() as { count: number };
   if (unitCount.count === 0) {
+    seedData(db);
+  } else {
+    upgradeToMoonSerenityPortfolio(db);
+  }
+}
+
+function upgradeToMoonSerenityPortfolio(db: Database.Database) {
+  const hasRuaka = db.prepare("SELECT COUNT(*) as count FROM units WHERE id = 'moon-ruaka-101'").get() as { count: number };
+  if (hasRuaka.count === 0) {
+    // Clear old mock units & their associated placeholder bookings/tasks
+    db.exec(`
+      DELETE FROM cleaning_tasks;
+      DELETE FROM ical_feeds;
+      DELETE FROM bookings;
+      DELETE FROM units WHERE id IN ('moon-401', 'moon-302', 'moon-204', 'moon-101', 'moon-205', 'moon-303', 'moon-moon-horizon-penthouse-501-7aar');
+    `);
     seedData(db);
   }
 }
 
 function seedData(db: Database.Database) {
   const insertUnit = db.prepare(`
-    INSERT INTO units (id, name, type, floor, max_guests, base_price, cleaning_fee, status, description, amenities)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO units (id, name, type, floor, max_guests, base_price, cleaning_fee, status, description, amenities, door_code, wifi_name, wifi_password, address)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `);
 
   const units = [
     {
-      id: 'moon-401',
-      name: 'Moon Penthouse Suite 401',
-      type: 'Penthouse 2BR',
-      floor: 4,
-      max_guests: 4,
-      base_price: 320,
-      cleaning_fee: 65,
-      status: 'clean',
-      description: 'Panoramic skyline views, private wrap-around terrace, bespoke lunar aesthetic & jacuzzi.',
-      amenities: JSON.stringify(['King Bed', 'Wrap-around Balcony', 'Jacuzzi', 'High-speed WiFi', 'Nespresso', 'Kitchenette'])
-    },
-    {
-      id: 'moon-302',
-      name: 'Moon Skyline Loft 302',
-      type: '1BR Loft',
-      floor: 3,
-      max_guests: 2,
-      base_price: 195,
-      cleaning_fee: 45,
-      status: 'clean',
-      description: 'Double-height ceilings, designer acoustic lighting, dedicated workspace & city views.',
-      amenities: JSON.stringify(['Queen Bed', 'Work Desk', 'Smart TV 65"', 'High-speed WiFi', 'Full Kitchen'])
-    },
-    {
-      id: 'moon-204',
-      name: 'Moon Luna Studio 204',
-      type: 'Studio Suite',
-      floor: 2,
-      max_guests: 2,
-      base_price: 140,
-      cleaning_fee: 35,
-      status: 'dirty',
-      description: 'Cozy boutique studio with plush memory foam queen bed and ambient dimmable lighting.',
-      amenities: JSON.stringify(['Queen Bed', 'Walk-in Shower', 'Smart TV', 'High-speed WiFi', 'Mini Bar'])
-    },
-    {
-      id: 'moon-101',
-      name: 'Moon Garden Terrace 101',
-      type: '2BR Suite',
+      id: 'moon-ruaka-101',
+      name: 'Moon Ruaka Studio 101',
+      type: 'Cozy Studio',
       floor: 1,
-      max_guests: 5,
-      base_price: 245,
-      cleaning_fee: 55,
+      max_guests: 2,
+      base_price: 3000,
+      cleaning_fee: 500,
       status: 'clean',
-      description: 'Ground floor sanctuary with direct access to private bamboo courtyard and outdoor dining.',
-      amenities: JSON.stringify(['King Bed + 2 Twins', 'Private Garden Patio', 'BBQ Grill', 'Full Kitchen', 'Washer/Dryer'])
+      description: 'Chic designer studio in Ruaka near Two Rivers Mall with smart self-checkin, Netflix & high-speed Wi-Fi.',
+      amenities: JSON.stringify(['Queen Bed', 'Smart TV 50"', 'High-speed WiFi', 'Kitchenette', 'Hot Shower', '24/7 Security']),
+      door_code: '*1012#',
+      wifi_name: 'TheMoon_Ruaka_101',
+      wifi_password: 'serenity_ruaka_wifi',
+      address: 'Old Ruaka Rd, Ruaka, Nairobi (near Two Rivers Mall)'
     },
     {
-      id: 'moon-205',
-      name: 'Moon Apollo Deluxe 205',
+      id: 'moon-ruaka-202',
+      name: 'Moon Ruaka 1BR Suite 202',
       type: '1BR Suite',
       floor: 2,
       max_guests: 3,
-      base_price: 165,
-      cleaning_fee: 45,
-      status: 'in_progress',
-      description: 'Spacious open-concept living with comfortable sofa bed, minimalist Japanese-Scandinavian furniture.',
-      amenities: JSON.stringify(['King Bed', 'Convertible Sofa', 'Balcony', 'Dishwasher', 'Fast WiFi'])
+      base_price: 4000,
+      cleaning_fee: 600,
+      status: 'clean',
+      description: 'Executive 1-bedroom apartment in Ruaka with private balcony, fully equipped kitchen & backup generator.',
+      amenities: JSON.stringify(['King Bed', 'Balcony', 'Smart TV 55"', 'High-speed WiFi', 'Full Kitchen', 'Backup Generator']),
+      door_code: '*2024#',
+      wifi_name: 'TheMoon_Ruaka_202',
+      wifi_password: 'serenity_ruaka_wifi',
+      address: 'Old Ruaka Rd, Ruaka, Nairobi'
     },
     {
-      id: 'moon-303',
-      name: 'Moon Celestial Executive 303',
-      type: '2BR Suite',
+      id: 'moon-ruaka-301',
+      name: 'Moon Ruaka 2BR Deluxe 301',
+      type: '2BR Deluxe',
       floor: 3,
-      max_guests: 4,
-      base_price: 275,
-      cleaning_fee: 60,
+      max_guests: 5,
+      base_price: 5000,
+      cleaning_fee: 800,
       status: 'clean',
-      description: 'Modern luxury corner apartment with dual en-suite bathrooms and sunrise views.',
-      amenities: JSON.stringify(['2 King Beds', '2 Full Baths', 'Wine Cooler', 'Smart Locks', 'Sonos Sound System'])
+      description: 'Spacious 2-bedroom luxury residence in Ruaka ideal for family getaways and extended business stays.',
+      amenities: JSON.stringify(['2 King Beds', 'En-suite Master', 'Smart TV 65"', 'High-speed WiFi', 'Modern Kitchen', 'Free Parking']),
+      door_code: '*3015#',
+      wifi_name: 'TheMoon_Ruaka_301',
+      wifi_password: 'serenity_ruaka_wifi',
+      address: 'Old Ruaka Rd, Ruaka, Nairobi'
+    },
+    {
+      id: 'moon-thindigua-104',
+      name: 'Moon Thindigua 1BR Suite 104',
+      type: '1BR Suite',
+      floor: 1,
+      max_guests: 2,
+      base_price: 4200,
+      cleaning_fee: 600,
+      status: 'dirty',
+      description: 'Tranquil 1-bedroom sanctuary in Thindigua near Kalwani Park with lush views, peaceful surroundings & fast Wi-Fi.',
+      amenities: JSON.stringify(['Queen Bed', 'Work Desk', 'Smart TV 50"', 'High-speed WiFi', 'Full Kitchen', 'Balcony']),
+      door_code: '*1048#',
+      wifi_name: 'TheMoon_Thindigua_104',
+      wifi_password: 'serenity_thindigua_wifi',
+      address: 'Kalwani Park, off Kiambu Rd, Thindigua'
+    },
+    {
+      id: 'moon-thindigua-205',
+      name: 'Moon Thindigua 2BR Suite 205',
+      type: '2BR Suite',
+      floor: 2,
+      max_guests: 4,
+      base_price: 5500,
+      cleaning_fee: 800,
+      status: 'clean',
+      description: 'Serene 2-bedroom apartment in Thindigua with open-plan kitchen, premium bedding and 24/7 guarded security.',
+      amenities: JSON.stringify(['King Bed + Queen Bed', '2 Baths', 'Smart TV 55"', 'High-speed WiFi', 'Balcony', 'Washer']),
+      door_code: '*2059#',
+      wifi_name: 'TheMoon_Thindigua_205',
+      wifi_password: 'serenity_thindigua_wifi',
+      address: 'Kalwani Park, off Kiambu Rd, Thindigua'
+    },
+    {
+      id: 'moon-fourways-401',
+      name: 'Moon Fourways Executive 2BR 401',
+      type: 'Executive 2BR',
+      floor: 4,
+      max_guests: 4,
+      base_price: 7500,
+      cleaning_fee: 1000,
+      status: 'clean',
+      description: 'Ultra-luxury executive 2-bedroom apartment inside the prestigious Fourways Junction gated community.',
+      amenities: JSON.stringify(['2 King Beds', 'Private Balcony', 'Smart TV 65"', 'High-speed WiFi', 'Gated Community Security', 'Chef Kitchen']),
+      door_code: '*4011#',
+      wifi_name: 'TheMoon_Fourways_401',
+      wifi_password: 'serenity_fourways_wifi',
+      address: 'Fourways Junction Estate, off Northern Bypass / Kiambu Rd, Nairobi'
     }
   ];
 
   for (const u of units) {
-    insertUnit.run(u.id, u.name, u.type, u.floor, u.max_guests, u.base_price, u.cleaning_fee, u.status, u.description, u.amenities);
+    insertUnit.run(
+      u.id, u.name, u.type, u.floor, u.max_guests, u.base_price, u.cleaning_fee,
+      u.status, u.description, u.amenities, u.door_code, u.wifi_name, u.wifi_password, u.address
+    );
   }
 
   // Seed sample iCal feeds for Airbnb and Booking.com
@@ -190,12 +233,12 @@ function seedData(db: Database.Database) {
     VALUES (?, ?, ?, ?, ?, ?)
   `);
 
-  insertFeed.run('feed-1', 'moon-401', 'Airbnb', 'https://www.airbnb.com/calendar/ical/moon401.ics?s=sample_token', '2026-10-06 08:30:00', 'ok');
-  insertFeed.run('feed-2', 'moon-302', 'Airbnb', 'https://www.airbnb.com/calendar/ical/moon302.ics?s=sample_token', '2026-10-06 09:15:00', 'ok');
-  insertFeed.run('feed-3', 'moon-101', 'Booking.com', 'https://admin.booking.com/hotel/ical/moon101.ics', '2026-10-06 07:45:00', 'ok');
-  insertFeed.run('feed-4', 'moon-204', 'Airbnb', 'https://www.airbnb.com/calendar/ical/moon204.ics?s=sample_token', '2026-10-06 10:00:00', 'ok');
+  insertFeed.run('feed-1', 'moon-ruaka-101', 'Airbnb', 'https://www.airbnb.com/calendar/ical/moon_ruaka_101.ics?s=sample_token', '2026-10-06 08:30:00', 'ok');
+  insertFeed.run('feed-2', 'moon-ruaka-202', 'Airbnb', 'https://www.airbnb.com/calendar/ical/moon_ruaka_202.ics?s=sample_token', '2026-10-06 09:15:00', 'ok');
+  insertFeed.run('feed-3', 'moon-thindigua-104', 'Booking.com', 'https://admin.booking.com/hotel/ical/moon_thindigua_104.ics', '2026-10-06 07:45:00', 'ok');
+  insertFeed.run('feed-4', 'moon-fourways-401', 'Airbnb', 'https://www.airbnb.com/calendar/ical/moon_fourways_401.ics?s=sample_token', '2026-10-06 10:00:00', 'ok');
 
-  // Seed realistic bookings around today (October 2026)
+  // Seed realistic bookings around today (October 2026) in KES
   const insertBooking = db.prepare(`
     INSERT INTO bookings (id, unit_id, guest_name, guest_email, guest_phone, check_in, check_out, guests_count, total_price, paid_amount, status, source, external_uid, notes)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -204,131 +247,99 @@ function seedData(db: Database.Database) {
   const bookings = [
     {
       id: 'bk-1001',
-      unit_id: 'moon-401',
-      guest_name: 'Elena Rostova',
-      guest_email: 'elena.rostova@gmail.com',
-      guest_phone: '+1 (555) 349-8812',
+      unit_id: 'moon-ruaka-101',
+      guest_name: 'Faith Wanjiku',
+      guest_email: 'fwanjiku@safari-ke.com',
+      guest_phone: '+254 712 345 678',
       check_in: '2026-10-04',
       check_out: '2026-10-08',
       guests_count: 2,
-      total_price: 1345,
-      paid_amount: 1345,
+      total_price: 12500,
+      paid_amount: 12500,
       status: 'checked_in',
       source: 'airbnb',
       external_uid: 'airbnb-res-HM89A29',
-      notes: 'Late arrival arranged. Keycode sent. Requested extra down pillows.'
+      notes: 'Paid via Paystack M-Pesa. Late check-in keycode sent. Requested extra clean towels.'
     },
     {
       id: 'bk-1002',
-      unit_id: 'moon-401',
-      guest_name: 'David & Sarah Chen',
-      guest_email: 'dchen.tech@outlook.com',
-      guest_phone: '+1 (555) 890-1234',
+      unit_id: 'moon-ruaka-202',
+      guest_name: 'Brian & Sarah Otieno',
+      guest_email: 'brian.otieno@gmail.com',
+      guest_phone: '+254 722 890 123',
       check_in: '2026-10-10',
       check_out: '2026-10-15',
-      guests_count: 3,
-      total_price: 1665,
-      paid_amount: 1665,
+      guests_count: 2,
+      total_price: 20600,
+      paid_amount: 20600,
       status: 'confirmed',
       source: 'direct',
       external_uid: null,
-      notes: 'Repeat VIP guests. Celebrating 5th anniversary. Complimentary champagne on arrival.'
+      notes: 'Direct booking. Staycation in Ruaka. Paid in full.'
     },
     {
       id: 'bk-1003',
-      unit_id: 'moon-302',
+      unit_id: 'moon-thindigua-104',
       guest_name: 'Marcus Vance',
-      guest_email: 'marcus.vance@company.co',
+      guest_email: 'marcus.vance@unep.org',
       guest_phone: '+44 7700 900341',
       check_in: '2026-10-02',
       check_out: '2026-10-06',
       guests_count: 1,
-      total_price: 825,
-      paid_amount: 825,
+      total_price: 17400,
+      paid_amount: 17400,
       status: 'checked_out',
       source: 'booking.com',
       external_uid: 'bcom-9948271',
-      notes: 'Business trip. Requested invoice with VAT number.'
+      notes: 'UN conference guest. Checkout complete. Unit requires turnover cleaning.'
     },
     {
       id: 'bk-1004',
-      unit_id: 'moon-302',
+      unit_id: 'moon-fourways-401',
       guest_name: 'Sophia Lindqvist',
       guest_email: 'sophia.l@nordic.se',
       guest_phone: '+46 70 123 4567',
-      check_in: '2026-10-07',
+      check_in: '2026-10-05',
       check_out: '2026-10-12',
-      guests_count: 2,
-      total_price: 1020,
-      paid_amount: 1020,
-      status: 'confirmed',
+      guests_count: 3,
+      total_price: 53500,
+      paid_amount: 53500,
+      status: 'checked_in',
       source: 'airbnb',
       external_uid: 'airbnb-res-LK99201',
-      notes: 'Early check-in requested if available.'
+      notes: 'Executive 2BR at Fourways Junction. Visiting family in Nairobi.'
     },
     {
       id: 'bk-1005',
-      unit_id: 'moon-204',
-      guest_name: 'Liam O’Connor',
-      guest_email: 'liam.oc@dublin.ie',
-      guest_phone: '+353 87 654 3210',
-      check_in: '2026-10-05',
-      check_out: '2026-10-07',
-      guests_count: 1,
-      total_price: 315,
-      paid_amount: 315,
-      status: 'checked_in',
-      source: 'airbnb',
-      external_uid: 'airbnb-res-OP11043',
-      notes: 'Flight delayed arrival around 9 PM.'
+      unit_id: 'moon-ruaka-301',
+      guest_name: 'Kevin Mutua',
+      guest_email: 'kmutua@techcorp.ke',
+      guest_phone: '+254 733 456 789',
+      check_in: '2026-10-07',
+      check_out: '2026-10-11',
+      guests_count: 4,
+      total_price: 20800,
+      paid_amount: 20800,
+      status: 'confirmed',
+      source: 'direct',
+      external_uid: null,
+      notes: 'Weekend booking for 4 guests. M-Pesa reference verified.'
     },
     {
       id: 'bk-1006',
-      unit_id: 'moon-101',
-      guest_name: 'The Alvarez Family',
-      guest_email: 'j.alvarez@gmail.com',
-      guest_phone: '+1 (555) 432-1100',
-      check_in: '2026-10-03',
-      check_out: '2026-10-09',
-      guests_count: 4,
-      total_price: 1525,
-      paid_amount: 1525,
-      status: 'checked_in',
-      source: 'booking.com',
-      external_uid: 'bcom-3882910',
-      notes: 'Family with two children. Pack-and-play crib provided in second bedroom.'
-    },
-    {
-      id: 'bk-1007',
-      unit_id: 'moon-205',
-      guest_name: 'Amina & Tariq Mansoor',
+      unit_id: 'moon-thindigua-205',
+      guest_name: 'Dr. Amina & Tariq Mansoor',
       guest_email: 'amina.m@gmail.com',
       guest_phone: '+971 50 123 9876',
       check_in: '2026-10-08',
       check_out: '2026-10-14',
-      guests_count: 2,
-      total_price: 1035,
-      paid_amount: 500,
+      guests_count: 3,
+      total_price: 33800,
+      paid_amount: 17000,
       status: 'confirmed',
       source: 'direct',
       external_uid: null,
-      notes: 'Balance due upon check-in. Requested airport transfer contact.'
-    },
-    {
-      id: 'bk-1008',
-      unit_id: 'moon-303',
-      guest_name: 'Oliver Wright',
-      guest_email: 'oliver.wright@design.uk',
-      guest_phone: '+44 7911 123456',
-      check_in: '2026-10-05',
-      check_out: '2026-10-11',
-      guests_count: 2,
-      total_price: 1710,
-      paid_amount: 1710,
-      status: 'checked_in',
-      source: 'manual',
-      external_uid: null,
-      notes: 'Architect in town for design biennial.'
+      notes: 'Balance due upon check-in. Requested airport transfer from JKIA.'
     }
   ];
 
@@ -346,6 +357,6 @@ function seedData(db: Database.Database) {
     VALUES (?, ?, ?, ?, ?, ?, ?)
   `);
 
-  insertTask.run('cl-1', 'moon-302', 'bk-1003', '2026-10-06', 'pending', 'Maria Gomez', 'Deep turnover clean after Marcus Vance checkout. Change all linens.');
-  insertTask.run('cl-2', 'moon-204', 'bk-1005', '2026-10-07', 'pending', 'Alex Rivera', 'Turnover clean scheduled for checkout day.');
+  insertTask.run('cl-1', 'moon-thindigua-104', 'bk-1003', '2026-10-06', 'pending', 'Mercy Achieng', 'Turnover cleaning following checkout. Disinfect bathroom and change bedding.');
+  insertTask.run('cl-2', 'moon-ruaka-101', 'bk-1001', '2026-10-08', 'pending', 'John Kamau', 'Scheduled turnover for checkout day.');
 }

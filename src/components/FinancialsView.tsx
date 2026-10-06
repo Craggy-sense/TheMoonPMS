@@ -40,7 +40,7 @@ export function FinancialsView({ stats }: FinancialsViewProps) {
             <DollarSign size={18} style={{ color: 'var(--moon-gold)' }} />
           </div>
           <div style={{ fontSize: '32px', fontWeight: 800, marginTop: '8px', color: 'var(--text-main)', fontFamily: 'var(--font-heading)' }}>
-            ${totalRev.toLocaleString()}
+            KES {totalRev.toLocaleString()}
           </div>
           <div style={{ fontSize: '12px', color: '#10B981', marginTop: '6px', display: 'flex', alignItems: 'center', gap: '4px' }}>
             <ArrowUpRight size={14} /> Active reservations portfolio
@@ -55,7 +55,7 @@ export function FinancialsView({ stats }: FinancialsViewProps) {
             <TrendingUp size={18} style={{ color: '#6366F1' }} />
           </div>
           <div style={{ fontSize: '32px', fontWeight: 800, marginTop: '8px', color: 'var(--text-main)', fontFamily: 'var(--font-heading)' }}>
-            ${stats.adr}
+            KES {stats.adr.toLocaleString()}
           </div>
           <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '6px' }}>
             Weighted average nightly rate
@@ -97,7 +97,7 @@ export function FinancialsView({ stats }: FinancialsViewProps) {
               <span style={{ fontSize: '12px', fontWeight: 700 }}>{airbnbPct}%</span>
             </div>
             <div style={{ fontSize: '24px', fontWeight: 700, marginTop: '8px' }}>
-              ${airbnbRev.toLocaleString()}
+              KES {airbnbRev.toLocaleString()}
             </div>
             <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px' }}>
               Synced via iCal OTA
@@ -116,7 +116,7 @@ export function FinancialsView({ stats }: FinancialsViewProps) {
               <span style={{ fontSize: '12px', fontWeight: 700 }}>{bcomPct}%</span>
             </div>
             <div style={{ fontSize: '24px', fontWeight: 700, marginTop: '8px' }}>
-              ${bcomRev.toLocaleString()}
+              KES {bcomRev.toLocaleString()}
             </div>
             <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px' }}>
               Synced via iCal OTA
@@ -135,7 +135,7 @@ export function FinancialsView({ stats }: FinancialsViewProps) {
               <span style={{ fontSize: '12px', fontWeight: 700 }}>{directPct}%</span>
             </div>
             <div style={{ fontSize: '24px', fontWeight: 700, marginTop: '8px' }}>
-              ${directRev.toLocaleString()}
+              KES {directRev.toLocaleString()}
             </div>
             <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px' }}>
               Zero Commission bookings
@@ -154,7 +154,7 @@ export function FinancialsView({ stats }: FinancialsViewProps) {
               <span style={{ fontSize: '12px', fontWeight: 700 }}>{manualPct}%</span>
             </div>
             <div style={{ fontSize: '24px', fontWeight: 700, marginTop: '8px' }}>
-              ${manualRev.toLocaleString()}
+              KES {manualRev.toLocaleString()}
             </div>
             <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px' }}>
               Direct telephone & repeat guests

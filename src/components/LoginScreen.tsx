@@ -82,24 +82,20 @@ export function LoginScreen({ onLoginSuccess }: LoginScreenProps) {
         
         {/* Brand Header */}
         <div style={{ textAlign: 'center' }}>
-          <div style={{
-            width: '54px',
-            height: '54px',
-            borderRadius: '16px',
-            background: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            margin: '0 auto 14px',
-            boxShadow: '0 0 30px rgba(245, 158, 11, 0.3)'
-          }}>
-            <Moon size={30} fill="#080C15" color="#080C15" />
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '14px' }}>
+            <img
+              src="/themoon-icon.webp"
+              alt="The Moon Icon"
+              style={{ width: '48px', height: '48px', borderRadius: '50%', boxShadow: '0 0 25px rgba(56, 189, 248, 0.5)' }}
+            />
+            <img
+              src="/themoon-serenity-logo.webp"
+              alt="The Moon Serenity Furnished Apartments"
+              style={{ maxHeight: '42px', maxWidth: '240px', objectFit: 'contain' }}
+            />
           </div>
-          <h1 style={{ fontSize: '24px', fontWeight: 800, letterSpacing: '-0.02em', color: '#FFF' }}>
-            THE MOON APARTMENTS
-          </h1>
-          <p style={{ fontSize: '13px', color: 'var(--moon-gold)', letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: '2px', fontWeight: 600 }}>
-            Staff Access & Authentication
+          <p style={{ fontSize: '12px', color: 'var(--moon-gold)', letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 600 }}>
+            Ruaka • Thindigua • Fourways Junction
           </p>
         </div>
 

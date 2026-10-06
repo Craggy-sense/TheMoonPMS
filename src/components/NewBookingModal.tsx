@@ -234,10 +234,10 @@ export function NewBookingModal({
             }}>
               <div>
                 <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-                  {nights} Nights (${selectedUnit?.base_price || 0}/nt) + Cleaning Fee (${selectedUnit?.cleaning_fee || 0})
+                  {nights} Nights (KES {selectedUnit?.base_price?.toLocaleString() || 0}/nt) + Cleaning Fee (KES {selectedUnit?.cleaning_fee?.toLocaleString() || 0})
                 </div>
                 <div style={{ fontSize: '20px', fontWeight: 700, color: 'var(--moon-gold)' }}>
-                  Total: ${totalPrice.toLocaleString()}
+                  Total: KES {totalPrice.toLocaleString()}
                 </div>
               </div>
 

@@ -212,16 +212,16 @@ export function PropertyModal({ unit, onClose, onSaved }: PropertyModalProps) {
                   />
                 </div>
                 <div className="form-group">
-                  <label className="form-label">Nightly Rate ($)</label>
+                  <label className="form-label">Nightly Rate (KES)</label>
                   <input
                     type="number"
                     value={basePrice}
                     onChange={(e) => setBasePrice(e.target.value)}
-                    min="1"
+                    min="100"
                   />
                 </div>
                 <div className="form-group">
-                  <label className="form-label">Cleaning Fee ($)</label>
+                  <label className="form-label">Cleaning Fee (KES)</label>
                   <input
                     type="number"
                     value={cleaningFee}
